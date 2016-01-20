@@ -3,7 +3,10 @@ var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
-var gulpJasmine = require('gulp-jasmine');
+/*jshint -W079 */
+var jasmine = require('gulp-jasmine');
+/*jshint +W079 */
+var cover = require('gulp-coverage');
 
 function lint() {
   return gulp.src(['src/**/*.js',
@@ -18,7 +21,14 @@ function lint() {
 
 function test() {
   return gulp.src('spec/**/*Spec.js')
-    .pipe(gulpJasmine());
+    .pipe(cover.instrument({
+      pattern: ['src/**/*.js'],
+      debugDirectory: 'debug'
+    }))
+    .pipe(jasmine())
+    .pipe(cover.gather())
+    .pipe(cover.format())
+    .pipe(gulp.dest('coverage'));
 }
 
 gulp.task('lint', lint);
