@@ -12,7 +12,7 @@ In order to download dependencies and build the app via the command line, you wi
 1. Fork or clone this repository
 1. `cd` into the `repository` folder
 1. `npm install` to install all the required dependencies from `npm`
-1. lint and test using `gulp lint` or `gulp test`.
+1. lint and test using `gulp lint` and `gulp test`.
 
 ### Features
 
